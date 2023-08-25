@@ -1,17 +1,26 @@
-﻿using System;
+﻿using DomainLayer.Common;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DomainLayer.Models
 {
-    public class ModuleDetail
+    public class ModuleDetail : Modifier
     {
-        public int Id { get; set; }
+        [Key]
+        public Int64 Id { get; set; }
+        public Int64 ModuleId { get; set; }
         public string Name { get; set; }
+        public string Label { get; set; }
         public string? Description { get; set; }
-        public int? ModuleDetailFieldId { get; set; }
-        public ICollection<ModuleDetailField>? DetailField { get; set; }
+        public ICollection<ModuleDetailField>? ModuleDetailField { get; set; }
+        public bool? isSupportView { get; set; }
+        public bool? isSupportAdd { get; set; }
+        public bool? isSupportEdit { get; set; }
+        public bool? isSupportDelete { get; set; }
+        public bool? isSupportDetail { get; set; }
     }
 }

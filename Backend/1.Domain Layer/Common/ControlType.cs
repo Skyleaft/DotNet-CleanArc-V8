@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Common
 {
-    public class ControlType
+    public class ControlType : Modifier
     {
         [Key]
         public int Id { get; set; }

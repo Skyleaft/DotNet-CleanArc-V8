@@ -11,7 +11,8 @@ namespace DomainLayer.Models
     public class ModuleDetailField
     {
         [Key]
-        public int Id { get; set; }
+        public Int64 Id { get; set; }
+        public Int64 ModuleDetailId { get; set; }
         public string Name { get; set; }
         public int DataTypeId { get; set; }
         public Common.DataType DataType { get; set; }

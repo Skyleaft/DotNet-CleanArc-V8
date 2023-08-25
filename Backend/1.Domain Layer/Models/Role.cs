@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Common
+namespace DomainLayer.Models
 {
-    public class DataType : Modifier
+    public class Role
     {
         [Key]
         public int Id { get; set; }
+        [StringLength(50, ErrorMessage = "The value cannot exceed 50 characters. ")]
         public string Name { get; set; }
-
+        public int Level { get; set; }
     }
-    
 }

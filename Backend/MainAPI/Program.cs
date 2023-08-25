@@ -1,25 +1,52 @@
+using DomainLayer.Interfaces;
+using DomainLayer.Models.Auth;
+using MainAPI.Common;
+using MainAPI.Configurations;
+using Microsoft.EntityFrameworkCore;
+using System;
+using ISession = DomainLayer.Interfaces.ISession;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSystemd();
 
+builder.Services.AddDbContext<MyDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PGSQLConnection")));
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ISession,Session>();
+
+// Authn / Authrz
+builder.Services.AddAuthSetup(builder.Configuration);
+
+// Swagger
+builder.Services.AddSwaggerSetup();
+
+// HttpContextAcessor
+builder.Services.AddHttpContextAccessor();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
 }
 
-app.UseHttpsRedirection();
+app.UseSwaggerSetup();
+app.UseStaticFiles();
 
+//app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers()
+   .RequireAuthorization();
 
 app.Run();
