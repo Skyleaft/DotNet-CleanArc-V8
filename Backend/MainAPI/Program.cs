@@ -1,7 +1,9 @@
+using Application_Layer;
+using DomainLayer.Common;
 using DomainLayer.Interfaces;
 using DomainLayer.Models.Auth;
-using MainAPI.Common;
 using MainAPI.Configurations;
+using MainAPI.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using ISession = DomainLayer.Interfaces.ISession;
@@ -11,7 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSystemd();
 
-builder.Services.AddDbContext<MyDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PGSQLConnection")));
+builder.Services.AddApplicationServices();
+
+//builder.Services.AddDbContext<MyDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PGSQLConnection")));
+//builder.Services.AddDbContext<DataContext>();
+builder.Services.AddScoped<IContext,DataContext>();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<ISession,Session>();
@@ -24,6 +30,7 @@ builder.Services.AddSwaggerSetup();
 
 // HttpContextAcessor
 builder.Services.AddHttpContextAccessor();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

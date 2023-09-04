@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "V/uB4c3ksEPAig/vMOfEDTbkFfQ3Zpp/N0Ag6XBo4RN4JxXnSlL3Qdhc2YjIzxZ2Eftqo9VHU2nmVyxw56k5Gg==",
+  "dgSpecHash": "XgBci5G0YMmyWm4HLApPwXswWpWo0qgYHV+KgqOO0sqcDE8GPwWT4Rq8YeMMXuIloFhgulucsQ3Fo97P9ml8gQ==",
   "success": true,
   "projectFilePath": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Backend\\1.Domain Layer\\1.DomainLayer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Milzan\\.nuget\\packages\\ardalis.result\\7.1.0\\ardalis.result.7.1.0.nupkg.sha512",
+    "C:\\Users\\Milzan\\.nuget\\packages\\ardalis.result.fluentvalidation\\7.1.0\\ardalis.result.fluentvalidation.7.1.0.nupkg.sha512",
+    "C:\\Users\\Milzan\\.nuget\\packages\\fluentvalidation\\11.7.1\\fluentvalidation.11.7.1.nupkg.sha512",
     "C:\\Users\\Milzan\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Milzan\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\Milzan\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\Milzan\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "C:\\Users\\Milzan\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Milzan\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
@@ -33,5 +38,12 @@
     "C:\\Users\\Milzan\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\Milzan\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://35.219.62.164:8081/repository/DevExpress/index.json'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
 }

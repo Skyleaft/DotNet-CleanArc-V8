@@ -27,6 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "http://35.219.62.164:8081/repository/DevExpress/index.json": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -48,6 +49,22 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Ardalis.Result": {
+              "target": "Package",
+              "version": "[7.1.0, )"
+            },
+            "Ardalis.Result.FluentValidation": {
+              "target": "Package",
+              "version": "[7.1.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.7.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
               "version": "[2.2.2, )"
@@ -112,12 +129,20 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "http://35.219.62.164:8081/repository/DevExpress/index.json": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Backend\\1.Domain Layer\\1.DomainLayer.csproj": {
+                "projectPath": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Backend\\1.Domain Layer\\1.DomainLayer.csproj"
+              },
+              "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Backend\\3.Services Layer\\3.ServicesLayer.csproj": {
+                "projectPath": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Backend\\3.Services Layer\\3.ServicesLayer.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -132,6 +157,32 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Ardalis.Result": {
+              "target": "Package",
+              "version": "[7.1.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.7.1, )"
+            },
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.3.0, )"
+            },
+            "Mapster.EFCore": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -175,6 +226,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "http://35.219.62.164:8081/repository/DevExpress/index.json": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -256,6 +308,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "http://35.219.62.164:8081/repository/DevExpress/index.json": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -287,6 +340,18 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Ardalis.Result": {
+              "target": "Package",
+              "version": "[7.1.0, )"
+            },
+            "Ardalis.Result.AspNetCore": {
+              "target": "Package",
+              "version": "[7.1.0, )"
+            },
+            "Ardalis.Result.FluentValidation": {
+              "target": "Package",
+              "version": "[7.1.0, )"
+            },
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
@@ -295,15 +360,17 @@
               "target": "Package",
               "version": "[11.7.1, )"
             },
-            "Mediator.Abstractions": {
+            "Mapster": {
               "target": "Package",
-              "version": "[2.1.5, )"
+              "version": "[7.3.0, )"
             },
-            "Mediator.SourceGenerator": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Mapster.EFCore": {
               "target": "Package",
-              "version": "[2.1.5, )"
+              "version": "[5.1.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.1.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

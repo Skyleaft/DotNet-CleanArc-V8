@@ -1,11 +1,27 @@
-﻿using DomainLayer.Common;
+﻿
+using DomainLayer.Common;
 using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MainAPI.Common
+namespace MainAPI.Helpers
 {
-    public class MyDBContext : DbContext
+    public class DataContext : DbContext,IContext
     {
+        protected readonly IConfiguration Configuration;
+
+        public DataContext(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            //SQL Server Connection
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultSQLCON"));
+            //PGSQL Connection
+            options.UseNpgsql(Configuration.GetConnectionString("PGSQLConnection"));
+        }
+
         public virtual DbSet<Module> Module { get; set; }
         public virtual DbSet<ModuleField> ModuleField { get; set; }
         public virtual DbSet<ModuleDetail> ModuleDetail { get; set; }
@@ -15,9 +31,6 @@ namespace MainAPI.Common
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserDetail> UserDetail { get; set; }
         public virtual DbSet<UserToken> UserToken { get; set; }
-        public MyDBContext(DbContextOptions<MyDBContext> options) : base(options)
-        {
-        }
 
     }
 }

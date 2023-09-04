@@ -10,13 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Result" Version="7.1.0" />
+    <PackageReference Include="Ardalis.Result.AspNetCore" Version="7.1.0" />
+    <PackageReference Include="Ardalis.Result.FluentValidation" Version="7.1.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="FluentValidation" Version="11.7.1" />
-    <PackageReference Include="Mediator.Abstractions" Version="2.1.5" />
-    <PackageReference Include="Mediator.SourceGenerator" Version="2.1.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Mapster.EFCore" Version="5.1.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.7.23375.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
@@ -41,10 +42,6 @@
     <ProjectReference Include="..\1.Domain Layer\1.DomainLayer.csproj" />
     <ProjectReference Include="..\2.Application Layer\2.ApplicationLayer.csproj" />
     <ProjectReference Include="..\3.Services Layer\3.ServicesLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

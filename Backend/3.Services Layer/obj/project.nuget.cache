@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+Uvv4gT5+xjXRuugY6mZ6GAhsUpVXnWUykvNUhNqwmyzghE6IwY+VFSuDnBm8aXKVXu2GsRVDB2bA/CpGqg4JA==",
+  "dgSpecHash": "Ki8S9qYVtzgXQq1avzPawBPhUxR1ZEb7qreiGFz9xh4v3HYLN5oEOQhfTwg1w+W4ZbGB1j7R3Yk/zCwsTOSQAA==",
   "success": true,
   "projectFilePath": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Backend\\3.Services Layer\\3.ServicesLayer.csproj",
   "expectedPackageFiles": [
@@ -26,5 +26,12 @@
     "C:\\Users\\Milzan\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\Milzan\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://35.219.62.164:8081/repository/DevExpress/index.json'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
 }
