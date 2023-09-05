@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application_Layer.UserAuth
+namespace Application_Layer.UserCommand.UserCreate
 {
-    public class UserAuthCommandValidator : AbstractValidator<UserAuthCommand>
+    public class UserCreateCommandValidator : AbstractValidator<UserCreateCommand>
     {
-        public UserAuthCommandValidator()
+        public UserCreateCommandValidator()
         {
         }
     }

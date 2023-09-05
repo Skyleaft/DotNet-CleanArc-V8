@@ -88,6 +88,22 @@ namespace MainAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserToken",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    Token = table.Column<string>(type: "text", nullable: false),
+                    IpAddress = table.Column<string>(type: "text", nullable: false),
+                    ExpiredDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserToken", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ModuleDetail",
                 columns: table => new
                 {
@@ -247,31 +263,20 @@ namespace MainAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserToken",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    Token = table.Column<string>(type: "text", nullable: false),
-                    ExpiredDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Active = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "text", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserToken", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserToken_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.InsertData(
+                table: "Role",
+                columns: new[] { "Id", "Level", "Name" },
+                values: new object[] { 1, 1, "Super Admin" });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Active", "CreatedAt", "CreatedBy", "Password", "RoleId", "UpdatedAt", "UpdatedBy", "Username" },
+                values: new object[] { 1, false, null, null, "admin123", 1, null, null, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "UserDetail",
+                columns: new[] { "Id", "Email", "Name", "Phone", "PhotoURL", "UserId" },
+                values: new object[] { 1, null, "Administrator", null, null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ModuleDetail_ModuleId",
@@ -324,11 +329,6 @@ namespace MainAPI.Migrations
                 table: "UserDetail",
                 column: "UserId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserToken_UserId",
-                table: "UserToken",
-                column: "UserId");
         }
 
         /// <inheritdoc />

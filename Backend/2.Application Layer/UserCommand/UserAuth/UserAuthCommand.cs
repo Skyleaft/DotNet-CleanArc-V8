@@ -14,13 +14,25 @@ using DomainLayer.Common;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
+using System.Dynamic;
+using DomainLayer.Extensions;
 
-namespace Application_Layer.UserAuth
+namespace Application_Layer.UserCommand.UserAuth
 {
     public record UserAuthCommand : IRequest<Result<UserToken>>
     {
         public string Username { get; init; } = null!;
         public string Password { get; init; } = null!;
+        private string? IpAddress { get; set; } = null!;
+        public void setIpAdr(string ip)
+        {
+            IpAddress = ip;
+        }
+        public string? getIpAdr()
+        {
+            return IpAddress;
+        }
     }
 
     public class UserAuthCommandHandler : IRequestHandler<UserAuthCommand, Result<UserToken>>
@@ -37,8 +49,8 @@ namespace Application_Layer.UserAuth
         public async Task<Result<UserToken>> Handle(UserAuthCommand request, CancellationToken cancellationToken)
         {
             var user = await _context.User
-                .Include(s=>s.UserDetail)
-                .Include(s=>s.Role)
+                .Include(s => s.UserDetail)
+                .Include(s => s.Role)
                 .FirstOrDefaultAsync(x => x.Username == request.Username && x.Password == request.Password, cancellationToken);
             //pass encrytp
             //if (user == null || !BC.Verify(request.Password, user.Password))
@@ -57,12 +69,12 @@ namespace Application_Layer.UserAuth
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var claims = new ClaimsIdentity(new Claim[]
             {
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Email, user.UserDetail.Email),
-            new(ClaimTypes.Role, user.Role.Name)
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Email, user.UserDetail.Email),
+                new(ClaimTypes.Role, user.Role.Name)
             });
 
-            var expDate = DateTime.UtcNow.AddHours(8);
+            var expDate = DateTime.Now.AddDays(7);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -73,14 +85,30 @@ namespace Application_Layer.UserAuth
                 Issuer = _appSettings.Issuer
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return new UserToken
+            var userToken = new UserToken
             {
                 Token = tokenHandler.WriteToken(token),
                 ExpiredDate = expDate,
                 UserId = user.Id,
-                User = user
+                IpAddress = request.getIpAdr(),
             };
+            //_context.UserToken.Add(userToken);
+            var checkToken = await _context.UserToken.FirstOrDefaultAsync(x=>x.UserId == user.Id);
+            if(checkToken == null)
+            {
+                 _context.UserToken.Add(userToken);
+                 await _context.SaveChangesAsync();
+            }
+            else
+            {
+                checkToken.Token = userToken.Token;
+                checkToken.ExpiredDate = expDate;
+                checkToken.UserId = user.Id;
+                checkToken.IpAddress = userToken.IpAddress;
+                _context.UserToken.Update(checkToken);
+                await _context.SaveChangesAsync();
+            }
+            return userToken;
         }
     }
 }

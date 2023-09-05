@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MainAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230904085614_v1")]
-    partial class v1
+    [Migration("20230905090018_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -319,6 +319,14 @@ namespace MainAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Level = 1,
+                            Name = "Super Admin"
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.User", b =>
@@ -365,6 +373,16 @@ namespace MainAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = false,
+                            Password = "admin123",
+                            RoleId = 1,
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.UserDetail", b =>
@@ -399,6 +417,14 @@ namespace MainAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("UserDetail");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Administrator",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("DomainLayer.Models.UserToken", b =>
@@ -409,34 +435,21 @@ namespace MainAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("ExpiredDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Token")
+                    b.Property<string>("IpAddress")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("UpdatedBy")
+                    b.Property<string>("Token")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserToken");
                 });
@@ -518,17 +531,6 @@ namespace MainAPI.Migrations
                         .HasForeignKey("DomainLayer.Models.UserDetail", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DomainLayer.Models.UserToken", b =>
-                {
-                    b.HasOne("DomainLayer.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DomainLayer.Models.Module", b =>

@@ -22,6 +22,19 @@ namespace MainAPI.Helpers
             options.UseNpgsql(Configuration.GetConnectionString("PGSQLConnection"));
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasData(new Role[] {
+                new Role{Id=1,Level=1,Name="Super Admin"},
+            });
+            modelBuilder.Entity<User>().HasData(new User[] {
+                new User{Id=1,Username="admin",Password="admin123",RoleId=1 }
+            });
+            modelBuilder.Entity<UserDetail>().HasData(new UserDetail[] {
+                new UserDetail{Id=1,Name="Administrator" , UserId=1 }
+            });
+        }
+
         public virtual DbSet<Module> Module { get; set; }
         public virtual DbSet<ModuleField> ModuleField { get; set; }
         public virtual DbSet<ModuleDetail> ModuleDetail { get; set; }
