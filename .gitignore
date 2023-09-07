@@ -5,3 +5,4 @@ Backend/MainAPI/obj
 .vs
 Backend/3.Services Layer/obj
 Frontend/Clean Arc Web/obj
+Backend/MainAPI/wwwroot/Uploads

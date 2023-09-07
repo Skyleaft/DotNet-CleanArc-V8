@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ComponentsWebAssembly-CSharp.Server</RootNamespace>
     <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
+    <UserSecretsId>f8418534-b9b3-4996-8faf-039dcfab5cd4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

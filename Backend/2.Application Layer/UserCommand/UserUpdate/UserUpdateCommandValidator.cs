@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DomainLayer.Common;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Application_Layer.UserCommand.UserUpdate
         public UserUpdateCommandValidator()
         {
         }
+
     }
 }

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Sockets;
 using System.Net;
 using ISession = DomainLayer.Interfaces.ISession;
+using Microsoft.AspNetCore.Hosting;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,10 +28,12 @@ namespace MainAPI.Controllers
     {
         private readonly ISession _session;
         private readonly IMediator _mediator;
-        public UserController(ISession session, IMediator mediator)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public UserController(ISession session, IMediator mediator, IWebHostEnvironment webHostEnvironment)
         {
             _session = session;
             _mediator = mediator;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [ProducesResponseType(typeof(PaginatedList<User>), StatusCodes.Status200OK)]
@@ -47,12 +50,17 @@ namespace MainAPI.Controllers
         [ExpectedFailures(ResultStatus.Invalid)]
         public async Task<Result<User>> Create([FromForm] UserCreateCommand request)
         {
+            if (string.IsNullOrWhiteSpace(_webHostEnvironment.WebRootPath))
+            {
+                _webHostEnvironment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            }
+            request.setWebEnv(_webHostEnvironment.WebRootPath);
             var result = await _mediator.Send(request);
             return result;
         }
 
         [AllowAnonymous]
-        [HttpPut("{Id}")]
+        [HttpPut]
         [TranslateResultToActionResult]
         [ExpectedFailures(ResultStatus.Invalid, ResultStatus.NotFound)]
         public async Task<Result<User>> Update([FromForm] UserUpdateCommand request)
@@ -62,12 +70,12 @@ namespace MainAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpDelete("{Id}")]
+        [HttpDelete]
         [TranslateResultToActionResult]
         [ExpectedFailures(ResultStatus.Invalid, ResultStatus.NotFound)]
-        public async Task<Result> Delete(UserDeleteCommand request)
+        public async Task<Result> Delete(int Id)
         {
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(new UserDeleteCommand(Id));
             return result;
         }
 
