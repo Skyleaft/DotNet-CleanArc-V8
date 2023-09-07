@@ -57,8 +57,8 @@ namespace Application_Layer.UserCommand.UserUpdate
             origin.UpdatedAt = DateTime.Now;
             origin.UpdatedBy = request.User.UpdatedBy;
             origin.RoleId = request.User.RoleId;
-            origin.UserDetail = request.User.UserDetail.Adapt<UserDetail>();
 
+            string newImage = "";
             if (request.Photo != null)
             {
                 if (!string.IsNullOrEmpty(origin.UserDetail.PhotoURL))
@@ -67,18 +67,19 @@ namespace Application_Layer.UserCommand.UserUpdate
                     if (request.Photo.FileName != oriImageName.Last())
                     {
                         ImageHandler imageHandler = new ImageHandler();
-                        origin.UserDetail.PhotoURL = await imageHandler.ReplaceImageAsync(_webHostEnvironment.WebRootPath, oriImageName.Last(), request.Photo);
+                        newImage = await imageHandler.ReplaceImageAsync(_webHostEnvironment.WebRootPath, oriImageName.Last(), request.Photo);
 
                     }
                 }
                 else
                 {
                     ImageHandler imageHandler = new ImageHandler();
-                    origin.UserDetail.PhotoURL = await imageHandler.UploadImageAsync(_webHostEnvironment.WebRootPath, request.Photo);
+                    newImage = await imageHandler.UploadImageAsync(_webHostEnvironment.WebRootPath, request.Photo);
                 }
             }
 
-            
+            origin.UserDetail = request.User.UserDetail.Adapt<UserDetail>();
+            origin.UserDetail.PhotoURL = newImage;
 
             context.User.Update(origin);
             await context.SaveChangesAsync(cancellationToken);
