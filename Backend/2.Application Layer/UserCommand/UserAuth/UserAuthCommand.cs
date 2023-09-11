@@ -22,8 +22,8 @@ namespace Application_Layer.UserCommand.UserAuth
 {
     public record UserAuthCommand : IRequest<Result<UserToken>>
     {
-        public string Username { get; init; } = null!;
-        public string Password { get; init; } = null!;
+        public string Username { get; set; } = null!;
+        public string Password { get; set; } = null!;
         private string? IpAddress { get; set; } = null!;
         public void setIpAdr(string ip)
         {
@@ -92,7 +92,6 @@ namespace Application_Layer.UserCommand.UserAuth
                 UserId = user.Id,
                 IpAddress = request.getIpAdr(),
             };
-            //_context.UserToken.Add(userToken);
             var checkToken = await _context.UserToken.FirstOrDefaultAsync(x=>x.UserId == user.Id);
             if(checkToken == null)
             {

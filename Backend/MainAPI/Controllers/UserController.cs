@@ -16,6 +16,7 @@ using System.Net.Sockets;
 using System.Net;
 using ISession = DomainLayer.Interfaces.ISession;
 using Microsoft.AspNetCore.Hosting;
+using Application_Layer.UserCommand.UserLogout;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,14 +39,12 @@ namespace MainAPI.Controllers
 
         [ProducesResponseType(typeof(PaginatedList<User>), StatusCodes.Status200OK)]
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<PaginatedList<User>>> Get([FromQuery] UserGetCommand request)
         {
             return Ok(await _mediator.Send(request));
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [TranslateResultToActionResult]
         [ExpectedFailures(ResultStatus.Invalid)]
         public async Task<Result<User>> Create([FromForm] UserCreateCommand request)
@@ -59,7 +58,6 @@ namespace MainAPI.Controllers
             return result;
         }
 
-        [AllowAnonymous]
         [HttpPut]
         [TranslateResultToActionResult]
         [ExpectedFailures(ResultStatus.Invalid, ResultStatus.NotFound)]
@@ -69,7 +67,6 @@ namespace MainAPI.Controllers
             return result;
         }
 
-        [AllowAnonymous]
         [HttpDelete]
         [TranslateResultToActionResult]
         [ExpectedFailures(ResultStatus.Invalid, ResultStatus.NotFound)]
@@ -95,7 +92,15 @@ namespace MainAPI.Controllers
             request.setIpAdr(remoteIpAddress.ToString());
             var token = await _mediator.Send(request);
             return token;
-
+        }
+        [HttpPost]
+        [Route("logout")]
+        [TranslateResultToActionResult]
+        [ExpectedFailures(ResultStatus.Invalid)]
+        public async Task<Result> Logout(int Id)
+        {
+            var result = await _mediator.Send(new UserLogoutCommand(Id));
+            return result;
         }
     }
 }

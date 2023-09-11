@@ -1,0 +1,54 @@
+﻿@using DomainLayer.Models;
+@using Web.Authentication;
+<MudOverlay @bind-Visible="isVisible" DarkBackground="true" ZIndex="9999" AutoClose="false" Class="bg-filter">
+    <MudCard Class="pa-4">
+        <MudCardContent Class="justify-center align-content-center">
+            <div class="d-flex align-center justify-center">
+                <MudProgressCircular Color="Color.Secondary" Indeterminate />
+            </div>
+            <div class="d-flex align-center justify-center mt-2">
+                <MudText Typo="Typo.body2">Deletting...</MudText>
+            </div>
+        </MudCardContent>
+    </MudCard>
+</MudOverlay>
+
+<MudDialog>
+    <DialogContent>
+        <MudText>Yakin Mau Dihapus Akun dengan Username : @currentAccount.Username</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" OnClick="Submit">Delete</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public User currentAccount { get; set; }
+    [Inject] HttpClient httpClient { get; set; }
+    [Inject] private IDialogService DialogService { get; set; }
+    [Inject] ISnackbar Snackbar { get; set; }
+    [Parameter] public bool isVisible{ get; set; }
+
+    private async Task Submit()
+    {
+        isVisible = true;
+        await Task.Delay(1000);
+        var account = await httpClient.DeleteAsync("api/User/"+currentAccount.Id);
+        if (account.IsSuccessStatusCode)
+        {
+            Snackbar.Add($"Akun {currentAccount.Username} Berhasil Dihapus!",Severity.Success);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        else
+        {
+            await DialogService.ShowMessageBox(
+                        "Error",
+                        "Gagal Menghapus Akun!",
+                        yesText: "Ok");
+            MudDialog.Cancel();
+        }
+    }
+    void Cancel() => MudDialog.Cancel();
+}

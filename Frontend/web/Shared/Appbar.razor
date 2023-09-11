@@ -1,0 +1,37 @@
+﻿@using Web.Enums;
+<MudAppBar Class="docs-appbar" Elevation="0">
+    <NavLink ActiveClass="d-flex me-4" href="/">
+        @*            <MudBlazorLogo Class="docs-mudblazor-logo" />*@
+        <MudText Color="Color.Tertiary" Typo="Typo.h5" Class="docs-brand-text">CMA Galery</MudText>
+    </NavLink>
+    <MudButton Href="/" Color="Color.Inherit" Variant="Variant.Text" Class="@GetActiveClass(DocsBasePage.Home)">Home</MudButton>
+    <MudButton Href="/browse" Color="Color.Inherit" Variant="Variant.Text" Class="@GetActiveClass(DocsBasePage.BrowseGalery)">Browse Galery</MudButton>
+    <MudButton Href="/discover" Color="Color.Inherit" Variant="Variant.Text" Class="@GetActiveClass(DocsBasePage.DiscoverMore)">Discover More</MudButton>
+    <AuthorizeView>
+        <Authorized>
+            <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="/manage-galery">Manage Galery</MudButton>
+        </Authorized>
+    </AuthorizeView>
+    <MudSpacer />
+    <MudDivider FlexItem="true" Vertical="true" DividerType="DividerType.Middle" Class="mx-4 my-4" />
+
+    <MudTooltip Duration="1000" Text="@(LayoutService.DarkModeToggle == DarkLightMode.System ? "Switch to Light Theme" : LayoutService.DarkModeToggle == DarkLightMode.Dark ? "Switch to system" : "Switch to Dark Theme")">
+        <MudIconButton Icon="@(LayoutService.DarkModeToggle == DarkLightMode.System ? @Icons.Material.Filled.AutoMode : LayoutService.DarkModeToggle == DarkLightMode.Dark ? @Icons.Material.Rounded.LightMode : @Icons.Material.Outlined.DarkMode)" Color="Color.Inherit" OnClick="@LayoutService.ToggleDarkMode" />
+    </MudTooltip>
+    <AuthorizeView>
+        <Authorized>
+
+            <MudText Class="mr-2">Admin</MudText>
+            <MudAvatar Size="Size.Medium" />
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>My account</MudMenuItem>
+                <MudMenuItem OnClick="Logout">Logout</MudMenuItem>
+            </MudMenu>
+        </Authorized>
+        <NotAuthorized>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="/auth/login">Login</MudButton>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudAppBar>
+

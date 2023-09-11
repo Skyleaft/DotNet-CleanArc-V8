@@ -1,0 +1,14 @@
+﻿<MudDialog @bind-Visible="isVisible">
+    <DialogContent>
+        <div class="d-flex align-center justify-center">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true"/>
+        </div>
+       <MudText>@DialogText</MudText>
+    </DialogContent>
+</MudDialog>
+
+@code{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string DialogText { get; set; }
+    [Parameter] public bool isVisible{ get; set; }
+}

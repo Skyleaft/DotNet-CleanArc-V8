@@ -1,0 +1,108 @@
+﻿@using DomainLayer.Models;
+@using Web.Authentication;
+
+<MudOverlay @bind-Visible="isVisible" DarkBackground="true" ZIndex="9999" AutoClose="false" Class="bg-filter">
+    <MudCard Class="pa-4">
+        <MudCardContent Class="justify-center align-content-center">
+            <div class="d-flex align-center justify-center">
+                <MudProgressCircular Color="Color.Secondary" Indeterminate />
+            </div>
+            <div class="d-flex align-center justify-center mt-2">
+                <MudText Typo="Typo.body2">@loadingText</MudText>
+            </div>
+        </MudCardContent>
+    </MudCard>
+</MudOverlay>
+
+<MudDialog Class="py-4 px-7">
+    <DialogContent>
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudTextField Label="Username" Required="true" RequiredError="Username is required!"
+            @bind-Value="model.Username" For="@(() => model.Username)" Variant="Variant.Outlined" />
+            <MudTextField Label="Password" Class="mt-3" Required="true"
+            @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" Variant="Variant.Outlined" />
+            @* <MudSelect T="string" Label="Role" Class="mt-3" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="model.Role" Required>
+                <MudSelectItem T="string" Value="@($"Admin")">Admin</MudSelectItem>
+                <MudSelectItem T="string" Value="@($"User")">User</MudSelectItem>
+            </MudSelect> *@
+            <MudTextField Label="Nama Lengkap" Required="true" Class=" mt-3"
+             @bind-Value="model.UserDetail.Name" For="@(() => model.UserDetail.Name)" Variant="Variant.Outlined" />
+            <MudTextField Label="Email" Class=" mt-3"
+             @bind-Value="model.UserDetail.Email" For="@(() => model.UserDetail.Email)" Variant="Variant.Outlined" />
+            <MudButton ButtonType="ButtonType.Submit" StartIcon="@submitIcon" Variant="Variant.Filled" Color="Color.Primary" Class=" mt-4" FullWidth Style="height:50px">@submitText</MudButton>
+            <MudButton Variant="Variant.Text" Class=" mt-2" FullWidth Style="height:50px" OnClick="Close">Cancel</MudButton>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+        @code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public bool isEditMode { get; set; }
+    [Parameter] public User currentAccount { get; set; }
+    [Inject] HttpClient httpClient { get; set; }
+    [Inject] private IDialogService DialogService { get; set; }
+    [Inject] ISnackbar Snackbar { get; set; }
+    User? model = new User();
+    private string loadingText = "Registering...";
+    private bool isVisible;
+    private string submitText = "Daftar";
+    private string submitIcon = Icons.Material.Filled.PersonAdd;
+
+    void Close() => MudDialog.Close(DialogResult.Cancel());
+
+    protected override void OnInitialized()
+    {
+        if (isEditMode)
+        {
+            model = currentAccount;
+            loadingText = "Saving...";
+            submitText = "Save Edit";
+            submitIcon = Icons.Material.Filled.Save;
+        }
+        else
+        {
+        }
+        base.OnInitialized();
+    }
+
+    private async Task OnValidSubmit()
+    {
+        isVisible = true;
+        await Task.Delay(1000);
+
+        HttpResponseMessage account;
+        if (isEditMode)
+        {
+            account = await httpClient.PutAsJsonAsync("User", model);
+        }
+        else{
+            account = await httpClient.PostAsJsonAsync("User", model);
+        }
+        isVisible = false;
+        if (account.IsSuccessStatusCode)
+        {
+            string textMessage = isEditMode?"Diubah":"Dibuat";
+            Snackbar.Add($"Akun {model.Username} Berhasil {textMessage}",Severity.Success);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        else if (account.StatusCode.GetHashCode() == StatusCodes.Status400BadRequest)
+        {
+            await DialogService.ShowMessageBox(
+                        "Error",
+                        "Username Sudah Ada!",
+                        yesText: "Ok");
+        }
+        else
+        {
+            //Console.WriteLine($"{model.Id} {model.Username} {model.Password} {model.Role}");
+            //Console.WriteLine(account.ReasonPhrase);
+            string textMessage = isEditMode ? "Mengubah" : "Membuat";
+            await DialogService.ShowMessageBox(
+                        "Error",
+                        $"Gagal {textMessage} Akun! {account.ReasonPhrase}",
+                        yesText: "Ok");
+        }
+
+    }
+}

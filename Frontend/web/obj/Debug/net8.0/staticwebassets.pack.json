@@ -1,0 +1,77 @@
+{
+  "Files": [
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Web.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Web.bundle.scp.css"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\Layout\\_mainlayout.css",
+      "PackagePath": "staticwebassets\\css\\Layout\\_mainlayout.css"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\Layout\\_mainlayout.min.css",
+      "PackagePath": "staticwebassets\\css\\Layout\\_mainlayout.min.css"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap-icons\\bootstrap-icons.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap-icons\\bootstrap-icons.css"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap-icons\\bootstrap-icons.json",
+      "PackagePath": "staticwebassets\\css\\bootstrap-icons\\bootstrap-icons.json"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap-icons\\bootstrap-icons.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap-icons\\bootstrap-icons.min.css"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap-icons\\bootstrap-icons.scss",
+      "PackagePath": "staticwebassets\\css\\bootstrap-icons\\bootstrap-icons.scss"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap-icons\\fonts\\bootstrap-icons.woff",
+      "PackagePath": "staticwebassets\\css\\bootstrap-icons\\fonts\\bootstrap-icons.woff"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap-icons\\fonts\\bootstrap-icons.woff2",
+      "PackagePath": "staticwebassets\\css\\bootstrap-icons\\fonts\\bootstrap-icons.woff2"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "F:\\Repository\\C# Project\\DotNet-CleanArc-V8\\Frontend\\web\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Web.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Web.props",
+      "PackagePath": "build\\Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Web.props",
+      "PackagePath": "buildMultiTargeting\\Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Web.props",
+      "PackagePath": "buildTransitive\\Web.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,18 @@
+﻿@using Web.Services;
+@inherits LayoutComponentBase
+@using Web.Enums
+@using Web.Theme;
+
+<MudThemeProvider @ref="@_mudThemeProvider" Theme="@LayoutService.CurrentTheme" IsDarkMode="@LayoutService.IsDarkMode" IsDarkModeChanged="LayoutService.SetDarkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Class="docs-appbar-filter" Color="Color.Transparent" Elevation="0"></MudAppBar>
+    <Appbar></Appbar>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+    
