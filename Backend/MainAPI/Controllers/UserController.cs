@@ -81,7 +81,6 @@ namespace MainAPI.Controllers
         [Route("authenticate")]
         [AllowAnonymous]
         [TranslateResultToActionResult]
-        [ExpectedFailures(ResultStatus.Invalid)]
         public async Task<Result<UserToken>> Authenticate([FromBody] UserAuthCommand request)
         {
             IPAddress remoteIpAddress = new GetIP().GetRemoteHostIpAddressUsingXRealIp(HttpContext);
@@ -96,7 +95,6 @@ namespace MainAPI.Controllers
         [HttpPost]
         [Route("logout")]
         [TranslateResultToActionResult]
-        [ExpectedFailures(ResultStatus.Invalid)]
         public async Task<Result> Logout(int Id)
         {
             var result = await _mediator.Send(new UserLogoutCommand(Id));

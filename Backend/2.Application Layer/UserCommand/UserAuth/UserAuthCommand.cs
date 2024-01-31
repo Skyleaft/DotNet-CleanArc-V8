@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
 using System.Dynamic;
 using DomainLayer.Extensions;
+using DomainLayer.Common.Helpers;
 
 namespace Application_Layer.UserCommand.UserAuth
 {
@@ -37,10 +38,10 @@ namespace Application_Layer.UserCommand.UserAuth
 
     public class UserAuthCommandHandler : IRequestHandler<UserAuthCommand, Result<UserToken>>
     {
-        private readonly IContext _context;
+        private readonly DataContext _context;
         private readonly TokenConfiguration _appSettings;
 
-        public UserAuthCommandHandler(IOptions<TokenConfiguration> appSettings, IContext context)
+        public UserAuthCommandHandler(IOptions<TokenConfiguration> appSettings, DataContext context)
         {
             _context = context;
             _appSettings = appSettings.Value;
@@ -90,6 +91,7 @@ namespace Application_Layer.UserCommand.UserAuth
                 Token = tokenHandler.WriteToken(token),
                 ExpiredDate = expDate,
                 UserId = user.Id,
+                User = user,
                 IpAddress = request.getIpAdr(),
             };
             var checkToken = await _context.UserToken.FirstOrDefaultAsync(x=>x.UserId == user.Id);

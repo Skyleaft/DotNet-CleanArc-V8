@@ -16,6 +16,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using DomainLayer.Extensions;
 using Microsoft.AspNetCore.Hosting;
+using DomainLayer.Common.Helpers;
 
 namespace Application_Layer.UserCommand.UserUpdate
 {
@@ -36,10 +37,10 @@ namespace Application_Layer.UserCommand.UserUpdate
 
     public class UserUpdateCommandHandler : IRequestHandler<UserUpdateCommand, Result<User>>
     {
-        private readonly IContext context;
+        private readonly DataContext context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public UserUpdateCommandHandler(IContext context, IWebHostEnvironment webHostEnvironment)
+        public UserUpdateCommandHandler(DataContext context, IWebHostEnvironment webHostEnvironment)
         {
             this.context = context;
             this._webHostEnvironment = webHostEnvironment;

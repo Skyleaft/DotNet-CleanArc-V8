@@ -15,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Authentication\Pages\AuthPage.razor" />
     <None Include="compilerconfig.json" />
+    <None Include="Components\AccountDialog.razor" />
+    <None Include="Components\BluryDialog.razor" />
+    <None Include="Components\DeleteAccountDialog.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +27,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0-preview.7.23375.6" />
     <PackageReference Include="MudBlazor" Version="6.9.0" />
     <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

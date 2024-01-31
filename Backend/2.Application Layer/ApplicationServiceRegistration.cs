@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using MediatR.Extensions.FluentValidation.AspNetCore;
 
 namespace Application_Layer
 {
@@ -20,8 +21,9 @@ namespace Application_Layer
             //    config.RegisterServicesFromAssemblyContaining(typeof(IAssemblyMarker));
             //    config.AddOpenBehavior(typeof(ValidationResultPipelineBehavior<,>));
             //});
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
+            var domainAssembly = Assembly.GetExecutingAssembly();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(domainAssembly));
+            services.AddFluentValidation(new[] { domainAssembly });
             return services;
         }
     }

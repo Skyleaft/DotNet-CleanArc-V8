@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DomainLayer.Common.Responses;
 using DomainLayer.Common.Requests;
+using DomainLayer.Common.Helpers;
 
 namespace Application_Layer.UserCommand.UserGet
 {
@@ -29,9 +30,9 @@ namespace Application_Layer.UserCommand.UserGet
 
     public class UserGetCommandHandler : IRequestHandler<UserGetCommand, PaginatedList<User>>
     {
-        private readonly IContext context;
+        private readonly DataContext context;
 
-        public UserGetCommandHandler(IContext context)
+        public UserGetCommandHandler(DataContext context)
         {
 			this.context = context;
         }
@@ -43,6 +44,7 @@ namespace Application_Layer.UserCommand.UserGet
                 .WhereIf(request.Id != null, x => x.Id == request.Id)
                 .WhereIf(request.RoleID != null, x => x.RoleId == request.RoleID)
                 .ApplyOrderBy(request.SortBy, request.OrderDirection);
+            
             return await item.ProjectToType<User>().ToPaginatedListAsync(request.CurrentPage, request.PageSize);
         }
     }

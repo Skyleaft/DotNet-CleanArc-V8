@@ -11,6 +11,14 @@ namespace Application_Layer.UserCommand.UserAuth
     {
         public UserAuthCommandValidator()
         {
+            RuleFor(x => x.Username)
+                .NotEmpty()
+                .NotNull()
+                .MinimumLength(3);
+            RuleFor(x => x.Password)
+                .NotEmpty()
+                .NotNull()
+                .MinimumLength(8);
         }
     }
 }

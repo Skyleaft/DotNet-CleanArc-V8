@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using static System.Net.Mime.MediaTypeNames;
 using DomainLayer.Extensions;
+using DomainLayer.Common.Helpers;
 
 namespace Application_Layer.UserCommand.UserCreate
 {
@@ -48,8 +49,8 @@ namespace Application_Layer.UserCommand.UserCreate
 
     public class UserCreateCommandHandler : IRequestHandler<UserCreateCommand, Result<User>>
     {
-        private readonly IContext _context;
-        public UserCreateCommandHandler(IContext context)
+        private readonly DataContext _context;
+        public UserCreateCommandHandler(DataContext context)
         {
             _context = context;
         }

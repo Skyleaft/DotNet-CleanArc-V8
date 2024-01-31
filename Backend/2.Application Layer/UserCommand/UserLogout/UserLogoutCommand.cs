@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Ardalis.Result;
 using DomainLayer.Models;
+using DomainLayer.Common.Helpers;
 
 namespace Application_Layer.UserCommand.UserLogout
 {
@@ -19,9 +20,9 @@ namespace Application_Layer.UserCommand.UserLogout
 
     public class UserLogoutCommandHandler : IRequestHandler<UserLogoutCommand,Result>
     {
-        private readonly IContext _context;
+        private readonly DataContext _context;
         private readonly TokenConfiguration _appSettings;
-        public UserLogoutCommandHandler(IOptions<TokenConfiguration> appSettings, IContext context)
+        public UserLogoutCommandHandler(IOptions<TokenConfiguration> appSettings, DataContext context)
         {
             _context = context;
             _appSettings = appSettings.Value;

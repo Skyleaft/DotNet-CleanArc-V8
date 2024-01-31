@@ -11,6 +11,7 @@ using DomainLayer.Common;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
+using DomainLayer.Common.Helpers;
 
 namespace Application_Layer.UserCommand.UserDelete
 {
@@ -21,9 +22,9 @@ namespace Application_Layer.UserCommand.UserDelete
 
     public class UserDeleteCommandHandler : IRequestHandler<UserDeleteCommand, Result>
     {
-        private readonly IContext _context;
+        private readonly DataContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public UserDeleteCommandHandler(IContext context, IWebHostEnvironment webHostEnvironment)
+        public UserDeleteCommandHandler(DataContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             this._webHostEnvironment = webHostEnvironment;

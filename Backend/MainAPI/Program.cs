@@ -1,9 +1,9 @@
 using Application_Layer;
 using DomainLayer.Common;
+using DomainLayer.Common.Helpers;
 using DomainLayer.Interfaces;
 using DomainLayer.Models.Auth;
 using MainAPI.Configurations;
-using MainAPI.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using ISession = DomainLayer.Interfaces.ISession;
@@ -17,7 +17,7 @@ builder.Services.AddApplicationServices();
 
 //builder.Services.AddDbContext<MyDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PGSQLConnection")));
 //builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<IContext,DataContext>();
+builder.Services.AddScoped<DataContext>();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<ISession,Session>();
